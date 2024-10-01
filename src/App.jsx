@@ -13,7 +13,8 @@ import PlacePage from './pages/PlacePage.jsx';
 import BookingPage from './pages/BookingPage.jsx';
 import BookingsPage from './pages/BookingsPage.jsx';
 
-axios.defaults.baseURL='http://localhost:4000';
+//axios.defaults.baseURL='http://localhost:4000';
+axios.defaults.baseURL='https://wanderstay-backend-w6tg.onrender.com';
 axios.defaults.withCredentials=true;
 
 function App() {
