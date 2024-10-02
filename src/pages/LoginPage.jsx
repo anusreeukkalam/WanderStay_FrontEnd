@@ -22,11 +22,14 @@ export default function LoginPage(){
     }
     catch(e)
     {
-        if(e.response && e.response.status===400){
-       alert('login failed: invalid credentials or user not registered')
+        if(e.response && e.response.status===404){
+       alert('login failed: user not registered, please register first.')
         }
+         else if(e.response && e.response.status===422){
+       alert('login failed: wrong password, please use the correct password.')
+        }   
         else{
-            alert('login failed: something went wrong')
+            alert('login failed: something went wrong, please try logging in again.')
         }
         setEmail('');
         setPassword('');
