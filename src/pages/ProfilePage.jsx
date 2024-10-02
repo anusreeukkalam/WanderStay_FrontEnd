@@ -18,7 +18,7 @@ export default function AccountPage(){
         try{
         await axios.post('/logout');
         setUser(null);
-        setRedirect('/ogin');
+        setRedirect('/login');
         } catch (err){
             alert('logout failed');
             console.error('Logout failed:', err);
