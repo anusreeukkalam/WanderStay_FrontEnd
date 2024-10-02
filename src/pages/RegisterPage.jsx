@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function RegisterPage(){
@@ -7,6 +7,7 @@ export default function RegisterPage(){
     const [name,setName]=useState('');
     const [email,setEmail]=useState('');
     const [password,setPassword]=useState('');
+    const navigate = useNavigate();
 
     async function registerUser(ev){
         ev.preventDefault();//so it does not reload the page on clicking submit
@@ -16,7 +17,8 @@ export default function RegisterPage(){
             email,
             password,
           });
-          alert('Registration Successful! Now you can login. ')
+          alert('Registration Successful! Now you can login. ');
+            navigate('/login');
         }
         catch(e){
           alert('Registration failed, Please check if email is already used and try again.')
