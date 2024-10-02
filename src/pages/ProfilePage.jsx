@@ -18,7 +18,7 @@ export default function AccountPage(){
         try{
         await axios.post('/logout');
         setUser(null);
-        setRedirect('/');
+        setRedirect('/ogin');
         } catch (err){
             alert('logout failed');
             console.error('Logout failed:', err);
@@ -30,7 +30,7 @@ export default function AccountPage(){
         return 'Loading...';
     }
 
-    if(ready && !user&&!redirect){
+    if(ready && !user && !redirect){
         return <Navigate to={'/login'}/>
     }
 
