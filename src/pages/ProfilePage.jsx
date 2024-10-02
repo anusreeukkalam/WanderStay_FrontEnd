@@ -15,9 +15,14 @@ export default function AccountPage(){
     }
 
     async function logout(){
+        try{
         await axios.post('/logout');
         setUser(null);
         setRedirect('/');
+        } catch (err){
+            alert('logout failed');
+            console.error('Logout failed:', err);
+        }
     }
 
     if(!ready)
