@@ -23,7 +23,7 @@ export default function BookingsPage(){
         <AccountNav />
         <div className="flex justify-center items-center ">
         <div className="mx-5 grid gap-4 ">
-          {bookings?.length>0 && bookings.map(booking => (
+          {bookings?.length>0 ? ( bookings.map(booking => (
             <Link key={booking._id} to={`/account/bookings/${booking._id}`} className="flex items-center  gap-5 bg-gray-200 rounded-xl mt-2 overflow-hidden md:w-[40rem] lg:w-[48rem]">
                 <div className="w-[18rem] h-[18rem] ">
                     <PlaceImg place={booking.place} />
