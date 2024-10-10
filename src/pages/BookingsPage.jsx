@@ -6,34 +6,33 @@ import { differenceInCalendarDays, format } from "date-fns";
 import { Link } from "react-router-dom";
 
 export default function BookingsPage() {
-  const [bookings, setBookings] = useState([]); // State to hold booking data
-  const [loading, setLoading] = useState(true); // State to manage loading status
-  const [error, setError] = useState(null); // State to hold any error messages
+  const [bookings, setBookings] = useState([]); 
+  const [loading, setLoading] = useState(true); 
+  const [error, setError] = useState(null); 
 
   useEffect(() => {
-    // Fetch bookings from the server
     const fetchBookings = async () => {
       try {
         const response = await axios.get('/bookings');
-        setBookings(response.data); // Set bookings state with fetched data
+        setBookings(response.data); 
       } catch (error) {
         console.error('Error fetching bookings:', error);
-        setError('Failed to fetch bookings.'); // Update error state
+        setError('Failed to fetch bookings.');
       } finally {
-        setLoading(false); // Set loading to false after fetching
+        setLoading(false); 
       }
     };
 
     fetchBookings();
-  }, []); // Run once on component mount
+  }, []); 
 
   return (
     <div>
       <AccountNav />
       <div className="flex justify-center items-center">
         <div className="mx-5 grid gap-4">
-          {loading && <div>Loading bookings...</div>} {/* Display loading message */}
-          {error && <div>{error}</div>} {/* Display error message */}
+          {loading && <div>Loading bookings...</div>} 
+          {error && <div>{error}</div>} 
           {bookings.length > 0 ? (
             bookings.map(booking => (
               <Link
@@ -57,13 +56,13 @@ export default function BookingsPage() {
                     </svg>
                   </div>
                   <div className="italic text-lg mt-2">
-                    Total Price: {booking.price}/-
+                    Total Price: {differenceInCalendarDays(new Date(booking.checkOut), new Date(booking.checkIn)) * booking.price}/-
                   </div>
                 </div>
               </Link>
             ))
           ) : (
-            !loading && <div>No Bookings found.</div> // Only show this message if not loading
+            !loading && <div>No Bookings found.</div>
           )}
         </div>
       </div>
