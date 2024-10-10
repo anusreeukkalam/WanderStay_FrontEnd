@@ -34,7 +34,7 @@ export default function BookingsPage(){
         <div className="mx-5 grid gap-4 ">
           {loading && <div>Loading bookings...</div>}
           {error && <div>{error}</div>}
-          {bookings?.length>0 ? (
+          {bookings.length>0 ? (
             bookings.map(booking => (
             <Link key={booking._id} 
                   to={`/account/bookings/${booking._id}`} 
