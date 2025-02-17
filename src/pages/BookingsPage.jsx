@@ -44,8 +44,12 @@ export default function BookingsPage() {
                   <PlaceImg place={booking.place} />
                 </div>
                 <div className="py-3">
-                  <h2 className="text-2xl font-semibold mb-2">{booking.place.title}</h2>
-                  Booked From: {format(new Date(booking.checkIn), 'dd-MM-yyyy')} &rarr; To: {format(new Date(booking.checkOut), 'dd-MM-yyyy')} <br />
+  {booking.place ? (
+    <h2 className="text-2xl font-semibold mb-2">{booking.place.title}</h2>
+  ) : (
+    <h2 className="text-2xl font-semibold mb-2 text-red-500">Place details unavailable</h2>
+  )}
+  Booked From: {format(new Date(booking.checkIn), 'dd-MM-yyyy')} &rarr; To: {format(new Date(booking.checkOut), 'dd-MM-yyyy')} <br />
                   <div className="flex items-center gap-1 mt-2 text-gray-500">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
@@ -56,7 +60,7 @@ export default function BookingsPage() {
                     </svg>
                   </div>
                   <div className="italic text-lg mt-2">
-                    Total Price: {differenceInCalendarDays(new Date(booking.checkOut), new Date(booking.checkIn)) * booking.price}/-
+                    Total Price: {differenceInCalendarDays(new Date(booking.checkOut), new Date(booking.checkIn)) *(booking.place?.price || 0)}/-
                   </div>
                 </div>
               </Link>
