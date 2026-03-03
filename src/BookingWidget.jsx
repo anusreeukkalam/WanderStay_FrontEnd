@@ -26,6 +26,15 @@ export default function BookingWidget({ place }) {
     numberOfNights = differenceInCalendarDays(new Date(checkOut), new Date(checkIn));
   }
 
+  // Set up date validation requirements
+  const today = new Date().toISOString().split('T')[0];
+  let maxCheckOutDate = '';
+  if (checkIn) {
+    const maxDate = new Date(checkIn);
+    maxDate.setDate(maxDate.getDate() + 10);
+    maxCheckOutDate = maxDate.toISOString().split('T')[0];
+  }
+
   async function bookThisPlace() {
     const response = await axios.post('/bookings', {
       checkIn, checkOut, numberOfGuests, name, phone,
@@ -52,13 +61,20 @@ export default function BookingWidget({ place }) {
             <input type="date"
               className="dark:bg-gray-700 dark:text-gray-200 rounded-md p-1 mt-1 bg-transparent w-full"
               value={checkIn}
-              onChange={ev => setCheckIn(ev.target.value)} />
+              min={today}
+              onChange={ev => {
+                setCheckIn(ev.target.value);
+                // Ensure checkout isn't suddenly before checkin or beyond max limits
+                setCheckOut('');
+              }} />
           </div>
           <div className="py-5 px-4 border-l border-gray-400 dark:border-gray-600">
             <label> CheckOut:</label>
             <input type="date"
               className="dark:bg-gray-700 dark:text-gray-200 rounded-md p-1 mt-1 bg-transparent w-full"
               value={checkOut}
+              min={checkIn || today}
+              max={maxCheckOutDate}
               onChange={ev => setCheckOut(ev.target.value)} />
           </div>
         </div>
@@ -67,7 +83,14 @@ export default function BookingWidget({ place }) {
           <input type="number"
             className="dark:bg-gray-700 dark:text-gray-200 rounded-md p-1 mt-1 bg-transparent w-full border border-gray-300 dark:border-gray-600"
             value={numberOfGuests}
-            onChange={ev => setNumberOfGuests(ev.target.value)} />
+            onChange={ev => {
+              const val = ev.target.value;
+              if (val > place.maxGuests) {
+                alert(`The maximum number of guests allowed for this place is ${place.maxGuests}.`);
+              } else {
+                setNumberOfGuests(val);
+              }
+            }} />
         </div>
         {numberOfNights > 0 && (
           <div className="my-2 mx-2 ">

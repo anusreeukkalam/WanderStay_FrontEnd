@@ -28,50 +28,51 @@ export default function PlacePage() {
       <AddressLink children={place.address} />
       <PlaceGallery place={place} />
 
-      <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] text-lg mx-2 mt-8 gap-10">
+      <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] text-lg mx-2 mt-8 gap-x-10 gap-y-12">
+        {/* ROW 1: LEFT - Description and host box */}
         <div>
-          <div className="mb-2">
+          <div className="mb-6">
             <h2 className="text-2xl font-semibold mb-3 dark:text-gray-100">Description</h2>
             <div className="dark:text-gray-300 text-gray-700">
               {place.description}
             </div>
           </div>
-          <div>
-            <div className="font-style: italic dark:text-gray-400 text-gray-600 my-4 p-4 bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <span className="font-semibold dark:text-gray-200">Check In:</span> {place.checkIn} <br />
-                  <span className="font-semibold dark:text-gray-200">Check Out:</span> {place.checkOut} <br />
-                  <span className="font-semibold dark:text-gray-200">Maximum Guests:</span> {place.maxGuests}
-                </div>
-                <div>
-                  <span className="font-semibold dark:text-gray-200">Host:</span> {place.owner?.name ? place.owner.name : 'Superhost'} <br />
-                  <span className="font-semibold dark:text-gray-200">Contact:</span> +91 *******{Math.floor(Math.random() * 900) + 100} <br />
-                </div>
-              </div>
-            </div>
-
-            {/* Location Map and Extra Info Side-by-Side */}
-            <div className="mt-8 mb-10 grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-8">
+          <div className="font-style: italic dark:text-gray-400 text-gray-600 my-4 p-4 bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <h2 className="text-xl font-semibold mb-3 dark:text-gray-100">Location Map</h2>
-                <PlaceMap address={place.address} />
+                <span className="font-semibold dark:text-gray-200">Check In:</span> {place.checkIn} <br />
+                <span className="font-semibold dark:text-gray-200">Check Out:</span> {place.checkOut} <br />
+                <span className="font-semibold dark:text-gray-200">Maximum Guests:</span> {place.maxGuests}
               </div>
-
-              <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700">
-                <h2 className="text-xl font-semibold mb-2 dark:text-gray-100">Extra Information</h2>
-                <div className="text-gray-500 dark:text-gray-400 text-sm leading-6">
-                  {place.extraInfo}
-                </div>
+              <div>
+                <span className="font-semibold dark:text-gray-200">Host:</span> {place.owner?.name ? place.owner.name : 'Superhost'} <br />
+                <span className="font-semibold dark:text-gray-200">Contact:</span> +91 *******{Math.floor(Math.random() * 900) + 100} <br />
               </div>
             </div>
-
           </div>
         </div>
 
+        {/* ROW 1: RIGHT - Booking Widget */}
         <div>
           <BookingWidget place={place} />
         </div>
+
+        {/* ROW 2: LEFT - Location Map */}
+        <div>
+          <h2 className="text-xl font-semibold mb-3 dark:text-gray-100">Location Map</h2>
+          <PlaceMap address={place.address} />
+        </div>
+
+        {/* ROW 2: RIGHT - Extra Information */}
+        <div>
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 h-full">
+            <h2 className="text-xl font-semibold mb-2 dark:text-gray-100">Extra Information</h2>
+            <div className="text-gray-500 dark:text-gray-400 text-sm leading-6">
+              {place.extraInfo}
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   );
