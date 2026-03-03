@@ -37,59 +37,24 @@ export default function PlacePage() {
             </div>
           </div>
           <div>
-            <div className="ml-5 font-style: italic dark:text-gray-400 text-gray-600 my-4 p-4 bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700">
-              <span className="font-semibold dark:text-gray-200">Check In:</span> {place.checkIn} <br />
-              <span className="font-semibold dark:text-gray-200">Check Out:</span> {place.checkOut} <br />
-              <span className="font-semibold dark:text-gray-200">Maximum Guests:</span> {place.maxGuests}
-            </div>
-            <div>
-              <h2 className="text-xl font-semibold mt-6 mb-2 dark:text-gray-100">Extra Information</h2>
-              <div className="text-gray-500 dark:text-gray-400 text-sm leading-6 mb-4">
-                {place.extraInfo}
-              </div>
-            </div>
-
-            {/* Map and Policy Section */}
-            <div className="mt-8 mb-4 grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <h2 className="text-xl font-semibold mb-3 dark:text-gray-100">Location Map</h2>
-                <PlaceMap address={place.address} />
-              </div>
-
-              {/* Added Host / Policies Section */}
-              <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700">
-                <h2 className="text-xl font-semibold mb-4 dark:text-gray-100">Things to know</h2>
-
-                <div className="mb-4">
-                  <h3 className="font-semibold text-gray-900 dark:text-gray-200 flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                    </svg>
-                    Check-in time
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">{place.checkIn}</p>
-                </div>
-
-                <div className="mb-4">
-                  <h3 className="font-semibold text-gray-900 dark:text-gray-200 flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                    </svg>
-                    Host
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">Superhost status. Highly rated for communication and clean spaces.</p>
-                </div>
-
+            <div className="font-style: italic dark:text-gray-400 text-gray-600 my-4 p-4 bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <h3 className="font-semibold text-gray-900 dark:text-gray-200 flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                    </svg>
-                    Cancellation policy
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">Free cancellation before 48 hours of check-in.</p>
+                  <span className="font-semibold dark:text-gray-200">Check In:</span> {place.checkIn} <br />
+                  <span className="font-semibold dark:text-gray-200">Check Out:</span> {place.checkOut} <br />
+                  <span className="font-semibold dark:text-gray-200">Maximum Guests:</span> {place.maxGuests}
+                </div>
+                <div>
+                  <span className="font-semibold dark:text-gray-200">Host:</span> Superhost status. Highly rated. <br />
+                  <span className="font-semibold dark:text-gray-200">Cancellation:</span> Free cancellation before 48 hours.
                 </div>
               </div>
+            </div>
+
+            {/* Location Map Section */}
+            <div className="mt-8 mb-10">
+              <h2 className="text-xl font-semibold mb-3 dark:text-gray-100">Location Map</h2>
+              <PlaceMap address={place.address} />
             </div>
 
           </div>
@@ -97,6 +62,14 @@ export default function PlacePage() {
 
         <div>
           <BookingWidget place={place} />
+
+          {/* Extra Information Moved Under Booking Widget */}
+          <div className="mt-6 bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700">
+            <h2 className="text-xl font-semibold mb-2 dark:text-gray-100">Extra Information</h2>
+            <div className="text-gray-500 dark:text-gray-400 text-sm leading-6">
+              {place.extraInfo}
+            </div>
+          </div>
         </div>
       </div>
     </div>
