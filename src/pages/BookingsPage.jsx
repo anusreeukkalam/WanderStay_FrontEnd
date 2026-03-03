@@ -6,9 +6,9 @@ import { differenceInCalendarDays, format } from "date-fns";
 import { Link } from "react-router-dom";
 
 export default function BookingsPage() {
-  const [bookings, setBookings] = useState([]); 
-  const [loading, setLoading] = useState(true); 
-  const [error, setError] = useState(null); 
+  const [bookings, setBookings] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -47,26 +47,26 @@ export default function BookingsPage() {
                 <Link
                   key={booking._id}
                   to={`/account/bookings/${booking._id}`}
-                  className="flex items-center gap-5 bg-gray-200 rounded-xl mt-2 overflow-hidden md:w-[40rem] lg:w-[48rem]"
+                  className="flex items-center gap-5 bg-gray-200 dark:bg-gray-800 border border-transparent dark:border-gray-700 rounded-xl mt-2 overflow-hidden md:w-[40rem] lg:w-[48rem]"
                 >
                   {/* Ensure place is not null before passing to PlaceImg */}
                   <div className="w-[18rem] h-[18rem]">
                     {booking.place ? (
                       <PlaceImg place={booking.place} />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-gray-300">
-                        <span className="text-gray-500">Image unavailable</span>
+                      <div className="w-full h-full flex items-center justify-center bg-gray-300 dark:bg-gray-700">
+                        <span className="text-gray-500 dark:text-gray-400">Image unavailable</span>
                       </div>
                     )}
                   </div>
-                  <div className="py-3">
+                  <div className="py-3 dark:text-gray-300">
                     {/* Ensure place exists before accessing title */}
                     {booking.place ? (
-                      <h2 className="text-2xl font-semibold mb-2">
+                      <h2 className="text-2xl font-semibold mb-2 dark:text-gray-100">
                         {booking.place.title}
                       </h2>
                     ) : (
-                      <h2 className="text-2xl font-semibold mb-2 text-red-500">
+                      <h2 className="text-2xl font-semibold mb-2 text-red-500 dark:text-red-400">
                         Place details unavailable
                       </h2>
                     )}
@@ -74,7 +74,7 @@ export default function BookingsPage() {
                     {format(new Date(booking.checkIn), "dd-MM-yyyy")} &rarr; To:{" "}
                     {format(new Date(booking.checkOut), "dd-MM-yyyy")}
                     <br />
-                    <div className="flex items-center gap-1 mt-2 text-gray-500">
+                    <div className="flex items-center gap-1 mt-2 text-gray-500 dark:text-gray-400">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -105,7 +105,7 @@ export default function BookingsPage() {
                         />
                       </svg>
                     </div>
-                    <div className="italic text-lg mt-2">
+                    <div className="italic text-lg mt-2 text-primary font-semibold" style={{ color: '#9F0D7F' }}>
                       Total Price: {totalPrice}/-
                     </div>
                   </div>
