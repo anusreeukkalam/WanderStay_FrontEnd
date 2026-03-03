@@ -26,13 +26,15 @@ export default function BookingWidget({ place }) {
     numberOfNights = differenceInCalendarDays(new Date(checkOut), new Date(checkIn));
   }
 
-  // Set up date validation requirements
-  const today = new Date().toISOString().split('T')[0];
+  // Set up date validation requirements using local timezone time
+  const now = new Date();
+  const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+
   let maxCheckOutDate = '';
   if (checkIn) {
     const maxDate = new Date(checkIn);
     maxDate.setDate(maxDate.getDate() + 10);
-    maxCheckOutDate = maxDate.toISOString().split('T')[0];
+    maxCheckOutDate = `${maxDate.getFullYear()}-${String(maxDate.getMonth() + 1).padStart(2, '0')}-${String(maxDate.getDate()).padStart(2, '0')}`;
   }
 
   async function bookThisPlace() {
