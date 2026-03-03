@@ -1,89 +1,94 @@
-import { useContext, useEffect, useState } from "react"; 
-import {differenceInCalendarDays} from "date-fns";
+import { useContext, useEffect, useState } from "react";
+import { differenceInCalendarDays } from "date-fns";
 import { Navigate } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "./UserContext";
 
 
-export default function BookingWidget({place}){
-    
-    const [checkIn,setCheckIn]=useState('');
-    const [checkOut,setCheckOut]=useState('');
-    const [numberOfGuests,setNumberOfGuests]=useState(1);
-    const [name,setName]=useState('');
-    const [phone,setPhone]=useState('');
-    const [redirect,setRedirect]=useState('');
-    const {user}=useContext(UserContext);
+export default function BookingWidget({ place }) {
 
-    useEffect(()=>{
-      if(user){
-        setName(user.name);
-      }
-    },[user]);
+  const [checkIn, setCheckIn] = useState('');
+  const [checkOut, setCheckOut] = useState('');
+  const [numberOfGuests, setNumberOfGuests] = useState(1);
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [redirect, setRedirect] = useState('');
+  const { user } = useContext(UserContext);
 
-    let numberOfNights=0;
-    if(checkIn && checkOut) {
-        numberOfNights=differenceInCalendarDays(new Date(checkOut),new Date(checkIn));
+  useEffect(() => {
+    if (user) {
+      setName(user.name);
     }
+  }, [user]);
 
-   async function bookThisPlace(){
-        const response= await axios.post('/bookings',{
-        checkIn,checkOut,numberOfGuests,name,phone,
-        place:  place._id,
-        price: numberOfGuests*place.price,
+  let numberOfNights = 0;
+  if (checkIn && checkOut) {
+    numberOfNights = differenceInCalendarDays(new Date(checkOut), new Date(checkIn));
+  }
+
+  async function bookThisPlace() {
+    const response = await axios.post('/bookings', {
+      checkIn, checkOut, numberOfGuests, name, phone,
+      place: place._id,
+      price: numberOfGuests * place.price,
     });
-    const bookingId=response.data._id;
+    const bookingId = response.data._id;
     setRedirect(`/account/bookings/${bookingId}`);
-    }
+  }
 
-    if(redirect){
-        return <Navigate to={redirect} />
-    }
+  if (redirect) {
+    return <Navigate to={redirect} />
+  }
 
-    return (
-        <div className="bg-white shadow-lg p-4 rounded-2xl text-center max-w-sm max-h-[32rem] ">
-        <div>
+  return (
+    <div className="bg-white dark:bg-gray-800 shadow-lg p-4 rounded-2xl text-center max-w-sm max-h-[32rem] dark:text-gray-200">
+      <div>
         Price : {place.price}/- per Night
-       </div>
-        <div className="text-sm border border-gray-300 my-5 rounded-xl">
-            <div className="flex border-b border-gray-300">
-              <div className="py-5 px-4 ">
-                <label> CheckIn:</label>
-                <input type="date" 
-                       value={checkIn}
-                       onChange={ ev => setCheckIn(ev.target.value)}/>
-              </div>
-              <div className="py-5 px-4 border-l border-gray-400 ">
-                <label> CheckOut:</label>
-                <input type="date" 
-                       value={checkOut} 
-                       onChange={ ev => setCheckOut(ev.target.value)} />
-              </div>
-            </div>
-            <div className="my-2 mx-4 ">
-             <label> Required Accomodation : </label>
-             <input type="number" 
-                    value={numberOfGuests} 
-                    onChange={ev => setNumberOfGuests(ev.target.value)}/>
-            </div>
-            {numberOfNights>0 && (
-                <div className="my-2 mx-2 ">
-                <label> Full Name:  </label>
-                <input type="text" 
-                       value={name} 
-                       onChange={ev => setName(ev.target.value)}/>
-                <label> Phone Number:  </label>
-                <input type="tel" 
-                       value={phone} 
-                       onChange={ev => setPhone(ev.target.value)}/>
-               </div>
-            )}
+      </div>
+      <div className="text-sm border border-gray-300 dark:border-gray-600 my-5 rounded-xl">
+        <div className="flex border-b border-gray-300 dark:border-gray-600">
+          <div className="py-5 px-4 ">
+            <label> CheckIn:</label>
+            <input type="date"
+              className="dark:bg-gray-700 dark:text-gray-200 rounded-md p-1 mt-1 bg-transparent w-full"
+              value={checkIn}
+              onChange={ev => setCheckIn(ev.target.value)} />
+          </div>
+          <div className="py-5 px-4 border-l border-gray-400 dark:border-gray-600">
+            <label> CheckOut:</label>
+            <input type="date"
+              className="dark:bg-gray-700 dark:text-gray-200 rounded-md p-1 mt-1 bg-transparent w-full"
+              value={checkOut}
+              onChange={ev => setCheckOut(ev.target.value)} />
+          </div>
         </div>
-        <button onClick={bookThisPlace} className=" rounded-lg px-20  mt-1 bg-primary text-white text-md py-1" > 
-            Book Now For : {numberOfNights>0 && (
-                <span>{numberOfNights*place.price}/-</span>
-            )}
-            </button>
+        <div className="my-2 mx-4 ">
+          <label> Required Accomodation : </label>
+          <input type="number"
+            className="dark:bg-gray-700 dark:text-gray-200 rounded-md p-1 mt-1 bg-transparent w-full border border-gray-300 dark:border-gray-600"
+            value={numberOfGuests}
+            onChange={ev => setNumberOfGuests(ev.target.value)} />
+        </div>
+        {numberOfNights > 0 && (
+          <div className="my-2 mx-2 ">
+            <label> Full Name: </label>
+            <input type="text"
+              className="dark:bg-gray-700 dark:text-gray-200 mt-1 mb-2 bg-transparent"
+              value={name}
+              onChange={ev => setName(ev.target.value)} />
+            <label> Phone Number: </label>
+            <input type="tel"
+              className="dark:bg-gray-700 dark:text-gray-200 mt-1 bg-transparent"
+              value={phone}
+              onChange={ev => setPhone(ev.target.value)} />
+          </div>
+        )}
+      </div>
+      <button onClick={bookThisPlace} className=" rounded-lg px-20  mt-1 bg-primary text-white text-md py-1" >
+        Book Now For : {numberOfNights > 0 && (
+          <span>{numberOfNights * place.price}/-</span>
+        )}
+      </button>
     </div>
-    );
+  );
 }

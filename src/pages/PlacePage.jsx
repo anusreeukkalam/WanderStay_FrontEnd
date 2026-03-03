@@ -49,12 +49,49 @@ export default function PlacePage() {
               </div>
             </div>
 
-            {/* Interactive Map */}
-            <div className="mt-8 mb-4">
-              <h2 className="text-xl font-semibold mb-3 dark:text-gray-100">Location Map</h2>
-              <PlaceMap address={place.address} />
-              <p className="text-sm text-gray-500 dark:text-gray-500 mt-2 italic text-center">Interactive map for illustrative purposes</p>
+            {/* Map and Policy Section */}
+            <div className="mt-8 mb-4 grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <h2 className="text-xl font-semibold mb-3 dark:text-gray-100">Location Map</h2>
+                <PlaceMap address={place.address} />
+              </div>
+
+              {/* Added Host / Policies Section */}
+              <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700">
+                <h2 className="text-xl font-semibold mb-4 dark:text-gray-100">Things to know</h2>
+
+                <div className="mb-4">
+                  <h3 className="font-semibold text-gray-900 dark:text-gray-200 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                    Check-in time
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">{place.checkIn}</p>
+                </div>
+
+                <div className="mb-4">
+                  <h3 className="font-semibold text-gray-900 dark:text-gray-200 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                    </svg>
+                    Host
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">Superhost status. Highly rated for communication and clean spaces.</p>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-gray-900 dark:text-gray-200 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                    Cancellation policy
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">Free cancellation before 48 hours of check-in.</p>
+                </div>
+              </div>
             </div>
+
           </div>
         </div>
 
