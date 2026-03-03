@@ -45,16 +45,25 @@ export default function PlacePage() {
                   <span className="font-semibold dark:text-gray-200">Maximum Guests:</span> {place.maxGuests}
                 </div>
                 <div>
-                  <span className="font-semibold dark:text-gray-200">Host:</span> Superhost status. Highly rated. <br />
-                  <span className="font-semibold dark:text-gray-200">Cancellation:</span> Free cancellation before 48 hours.
+                  <span className="font-semibold dark:text-gray-200">Host:</span> {place.owner?.name ? place.owner.name : 'Superhost'} <br />
+                  <span className="font-semibold dark:text-gray-200">Contact:</span> +91 *******{Math.floor(Math.random() * 900) + 100} <br />
                 </div>
               </div>
             </div>
 
-            {/* Location Map Section */}
-            <div className="mt-8 mb-10">
-              <h2 className="text-xl font-semibold mb-3 dark:text-gray-100">Location Map</h2>
-              <PlaceMap address={place.address} />
+            {/* Location Map and Extra Info Side-by-Side */}
+            <div className="mt-8 mb-10 grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-8">
+              <div>
+                <h2 className="text-xl font-semibold mb-3 dark:text-gray-100">Location Map</h2>
+                <PlaceMap address={place.address} />
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700">
+                <h2 className="text-xl font-semibold mb-2 dark:text-gray-100">Extra Information</h2>
+                <div className="text-gray-500 dark:text-gray-400 text-sm leading-6">
+                  {place.extraInfo}
+                </div>
+              </div>
             </div>
 
           </div>
@@ -62,14 +71,6 @@ export default function PlacePage() {
 
         <div>
           <BookingWidget place={place} />
-
-          {/* Extra Information Moved Under Booking Widget */}
-          <div className="mt-6 bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700">
-            <h2 className="text-xl font-semibold mb-2 dark:text-gray-100">Extra Information</h2>
-            <div className="text-gray-500 dark:text-gray-400 text-sm leading-6">
-              {place.extraInfo}
-            </div>
-          </div>
         </div>
       </div>
     </div>
