@@ -38,6 +38,7 @@ export default function BookingWidget({ place }) {
   async function bookThisPlace() {
     if (!user) {
       alert("Please login before booking.");
+      setRedirect('/login');
       return;
     }
     const response = await axios.post('/bookings', {
