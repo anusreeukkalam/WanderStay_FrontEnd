@@ -47,7 +47,7 @@ export default function PhotosUploader({ addedPhotos, onChange }) {
           value={photoLink}
           onChange={ev => setPhotoLink(ev.target.value)}
           placeholder={'Add using a link...jpg/png'} />
-        <button onClick={addPhotoByLink} className=" bg-gray-200 px-8 rounded-2xl text-md">Add Photo</button>
+        <button onClick={addPhotoByLink} className="bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 px-8 rounded-2xl text-md">Add Photo</button>
       </div>
       <div className="mt-2 grid gap-2 grid-cols-3 md:grid-cols-4 lg:grid-cols-6 ">
         {addedPhotos.length > 0 && addedPhotos.map(link => (
@@ -75,7 +75,7 @@ export default function PhotosUploader({ addedPhotos, onChange }) {
         ))}
 
         {/* Local file upload functionality */}
-        <label className="h-32 cursor-pointer flex flex-col items-center gap-1 justify-center border-2 border-dashed border-gray-400 dark:border-gray-600 bg-transparent rounded-2xl p-2 text-md text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+        <label className="h-32 cursor-pointer flex flex-col items-center gap-1 justify-center border-2 border-dashed border-gray-400 dark:border-gray-500 bg-gray-50 dark:bg-gray-800 rounded-2xl p-2 text-md text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
           <input type="file" multiple className="hidden" onChange={uploadPhoto} />
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-8">
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 16.5V9.75m0 0 3 3m-3-3-3 3M6.75 19.5a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A3.752 3.752 0 0 1 18 19.5H6.75Z" />
