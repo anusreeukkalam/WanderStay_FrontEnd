@@ -36,6 +36,10 @@ export default function BookingWidget({ place }) {
   }
 
   async function bookThisPlace() {
+    if (!user) {
+      alert("Please login before booking.");
+      return;
+    }
     const response = await axios.post('/bookings', {
       checkIn, checkOut, numberOfGuests, name, phone,
       place: place._id,
@@ -107,7 +111,7 @@ export default function BookingWidget({ place }) {
           </div>
         )}
       </div>
-      <button onClick={bookThisPlace} className=" rounded-lg px-20  mt-1 bg-primary text-white text-md py-1" >
+      <button onClick={bookThisPlace} className=" rounded-lg px-20  mt-1 bg-primary text-white text-md py-1" style={{ backgroundColor: '#9F0D7F' }}>
         Book Now For : {numberOfNights > 0 && (
           <span>{numberOfNights * place.price}/-</span>
         )}

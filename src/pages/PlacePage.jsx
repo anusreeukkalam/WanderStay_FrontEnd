@@ -64,8 +64,8 @@ export default function PlacePage() {
         </div>
 
         {/* ROW 2: RIGHT - Extra Information */}
-        <div>
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 h-full">
+        <div className="self-center">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 h-fit">
             <h2 className="text-xl font-semibold mb-2 dark:text-gray-100">Extra Information</h2>
             <div className="text-gray-500 dark:text-gray-400 text-sm leading-6">
               {place.extraInfo}
